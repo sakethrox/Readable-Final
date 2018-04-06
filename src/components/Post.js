@@ -7,6 +7,7 @@ import FaComment from 'react-icons/lib/fa/comment';
 import Modal from 'react-modal'
 import sortBy from 'sort-by'
 import DisplayPostWithRouter from './DisplayPost';
+import NewPost from './NewPost'
 import {Link, Route, withRouter} from 'react-router-dom'
 
 
@@ -169,6 +170,7 @@ class Post extends React.Component{
                         </Nav.Right>
                         </Nav>    
                         </header>
+
                         <div>Sort By</div>
                         <select style={{width: '100px'}} onChange={this.handleSort}>
                             <option value="none">--None--</option>
@@ -198,37 +200,13 @@ class Post extends React.Component{
                                         </div>
                                 )))}
                         </div>
-                        <div className='add-post'>
-                            <strong>New Post</strong><br/><br/>
-                            <form onSubmit={this.handleNewPost}>
-                                        <fieldset>
-                                            <label>
-                                            Title:
-                                            <input  type="text" name='title' value={this.state.title} onChange={this.handleInputChange}/>
-                                            </label><br/>
-                                            
-                                            <label>
-                                            Content:&nbsp;
-                                            <input type="text" name="content" value={this.state.content} onChange={this.handleInputChange}/>
-                                            </label><br/>
 
-                                            <label>
-                                            Category:
-                                            <select name="category" value={this.state.category} onChange={this.handleInputChange}>
-                                                {this.props.categories.map((category) => (
-                                                    <option value={category} key={category}>{category.charAt(0).toUpperCase()+ category.slice(1)}</option>
-                                                ))}
-                                            </select>
-                                            </label>
-                                            <label>
-                                            Created by:
-                                            <input type="text" name="createdBy" value={this.state.createdBy} onChange={this.handleInputChange}/>
-                                            </label><br/>
-                                            <br/>
-                                            <Button info type="submit" value="Submit" >Submit</Button>
-                                        </fieldset>
-                            </form>
-                        </div>
+                        
+                        <NewPost 
+                        addNewPost={this.props.addNewPost}
+                        categories={this.props.categories}
+                        />
+
                         <div>
                             <Modal
                                 isOpen={postModalOpen}

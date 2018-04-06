@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link, Route} from 'react-router-dom';
-import {withRouter} from 'react-router'
+import {withRouter} from 'react-router-dom'
 import Post from './Post'
 import {Title, SubTitle, Box, Media, Button, Icon, Delete, Input, Textarea} from 'reactbulma'
 import '../App.css'

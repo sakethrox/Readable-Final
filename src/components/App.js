@@ -11,8 +11,9 @@ import { addPost, removePost, likePost, unlikePost, addComment, removeComment, l
 import * as ReadableAPI from '../utils/api'
 import { connect } from 'react-redux'
 import Post from './Post.js'
+import PostDetail from './PostDetail.js'
 import { Button, Container, Nav, Title } from 'reactbulma'
-import {withRouter, Redirect} from 'react-router'
+import {withRouter, Link, Route} from 'react-router-dom'
 import '../App.css'
 
 
@@ -103,18 +104,19 @@ class App extends Component {
     return (
         <Container>
           {/* All the data is passed down to 'post' component to render the UI */}
-          <Post 
-          posts={posts} 
-          comments={comments}
-          likePost={this.likePost} 
-          unlikePost={this.unlikePost} 
-          removePost={this.removePost}
-          categories={this.props.categories}
-          addNewPost={this.addNewPost}
-          addNewComment={this.addNewComment}
-          removeComment={this.removeComment}
-          likeComment={this.likeComment}
-          unlikeComment={this.unlikeComment}/>
+          
+              <Post 
+              posts={posts} 
+              comments={comments}
+              likePost={this.likePost} 
+              unlikePost={this.unlikePost} 
+              removePost={this.removePost}
+              categories={this.props.categories}
+              addNewPost={this.addNewPost}
+              addNewComment={this.addNewComment}
+              removeComment={this.removeComment}
+              likeComment={this.likeComment}
+              unlikeComment={this.unlikeComment}/>
         </Container>
      
     )

@@ -7,7 +7,7 @@ import FaComment from 'react-icons/lib/fa/comment';
 import Modal from 'react-modal'
 import sortBy from 'sort-by'
 import DisplayPostWithRouter from './DisplayPost';
-import {Link, Route} from 'react-router-dom'
+import {Link, Route, withRouter} from 'react-router-dom'
 
 
 //styles for Modal
@@ -132,6 +132,7 @@ class Post extends React.Component{
     //This function handles the category view for the application
     handlePost = (event) => {
         event.preventDefault();
+        
         if(event.target.id == 'allposts'){
             this.setState({posts: this.props.posts})
         }
@@ -144,7 +145,7 @@ class Post extends React.Component{
         const { postModalOpen, post, posts} = this.state
         return (
             <div><br/>
-                <Route exact path="/" render={() => (
+                <Route exact path="/" render={() => ( 
                     <div>
                         <header>
                         <Title is='2'>Welcome to Read<span className='title-color'>able</span></Title>
@@ -156,7 +157,7 @@ class Post extends React.Component{
                             &nbsp;&nbsp;
                             <Nav.Item id='react' onClick={this.handlePost}>
                             React
-                            </Nav.Item>
+                            </Nav.Item> 
                             &nbsp;&nbsp;
                             <Nav.Item id='redux' onClick={this.handlePost}>
                             Redux
@@ -272,7 +273,7 @@ class Post extends React.Component{
                         </div> 
                     </div>
 
-                )}/>
+                 )}/> 
                 {/* DisplayPostWithRouter handles the post view. It receives all the info. related to the post and renders UI */}
                 <Route exact path={`/:category/:postId`} render={() => (
                     <DisplayPostWithRouter posts={this.props.posts}
@@ -289,10 +290,11 @@ class Post extends React.Component{
                 )
                 }/>
                 
+                
             </div>
         )
     }
 }
 
  
-export default Post
+export default withRouter(Post)

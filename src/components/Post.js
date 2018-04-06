@@ -7,7 +7,8 @@ import FaComment from 'react-icons/lib/fa/comment';
 import Modal from 'react-modal'
 import sortBy from 'sort-by'
 import DisplayPostWithRouter from './DisplayPost';
-import NewPost from './NewPost'
+
+import PostView from './PostView'
 import {Link, Route, withRouter} from 'react-router-dom'
 
 
@@ -146,66 +147,65 @@ class Post extends React.Component{
         const { postModalOpen, post, posts} = this.state
         return (
             <div><br/>
-                <Route exact path="/" render={() => ( 
-                    <div>
-                        <header>
+
+                    <header>
                         <Title is='2'>Welcome to Read<span className='title-color'>able</span></Title>
                         <Nav>
                         <Nav.Right menu className='temp'>
-                            <Nav.Item name='all-posts' id='allposts' onClick={this.handlePost}>
+                            <Link to='/'>
                             All-Posts
-                            </Nav.Item>
+                            </Link>
                             &nbsp;&nbsp;
-                            <Nav.Item id='react' onClick={this.handlePost}>
+                            <Link to='/react'>
                             React
-                            </Nav.Item> 
+                            </Link> 
                             &nbsp;&nbsp;
-                            <Nav.Item id='redux' onClick={this.handlePost}>
+                            <Link to='/redux'>
                             Redux
-                            </Nav.Item>
+                            </Link>
                             &nbsp;&nbsp;
-                            <Nav.Item id='udacity' onClick={this.handlePost}>
+                            <Link to='/Udacity'>
                             Udacity
-                            </Nav.Item>
+                            </Link>
                         </Nav.Right>
                         </Nav>    
                         </header>
-
-                        <div>Sort By</div>
-                        <select style={{width: '100px'}} onChange={this.handleSort}>
-                            <option value="none">--None--</option>
-                            <option value="voteScore">Votes</option>
-                            <option value="timestamp">Created</option>
-                        </select>
-                        <div className='post-content'>
-                                {posts !== '' && (posts.map((post) => (
-                                        <div key={post['id']}>
-                                        <Link to={`${post['category']}/${post['id']}`}><h3><strong>{post['title']}</strong></h3></Link> by <em>{post['author']}</em> <br/>
-                                        created on: {new Date(post['timestamp']).toString()} &nbsp;
-                                        <div className="button-class">
-                                            <Button small info onClick={() => this.openPostModal({post})}>Edit</Button>&nbsp;
-                                            <Button small warning onClick={() => this.props.removePost(post['id'])}>Delete</Button>
-                                        </div>
-                                        <div className='post-body'>
-                                                {post['body']}
-                                                <br/>
-                                                <TiThumbsUp onClick={() => this.props.likePost(post['id'])}/> 
-                                                <TiThumbsDown onClick={() => this.props.unlikePost(post['id'])}/>&nbsp;
-                                                {post['voteScore']} 
-                                                <div style={{float: 'right'}}>
-                                                <FaComment/> {this.props.comments.filter((comment) => post['id'] == comment['parentId']).length}
-                                                </div>
-                                        </div>
-                                        
-                                        </div>
-                                )))}
+                    
+                        <Route exact path="/" render={() => ( 
+                        <div>
+                            <PostView 
+                            handleSort={this.handleSort}
+                            openPostModal={this.openPostModal}
+                            removePost={this.props.removePost}
+                            likePost={this.props.likePost}
+                            unlikePost={this.props.unlikePost}
+                            comments={this.props.comments}
+                            posts={this.props.posts}
+                            categories={this.props.categories}
+                            addNewPost={this.props.addNewPost}
+                            />
                         </div>
+                        )}/>
+
+                        {this.props.categories.map((category) => (
+                            <Route exact path={`/${category}`} render={() => ( 
+                                <div>
+                                    <PostView 
+                                    handleSort={this.handleSort}
+                                    openPostModal={this.openPostModal}
+                                    removePost={this.props.removePost}
+                                    likePost={this.props.likePost}
+                                    unlikePost={this.props.unlikePost}
+                                    comments={this.props.comments}
+                                    posts={this.props.posts.filter((post) => post['category'] == category)}
+                                    categories={this.props.categories}
+                                    addNewPost={this.props.addNewPost}
+                                    />
+                                </div>
+                                )}/>
+                        ))}    
 
                         
-                        <NewPost 
-                        addNewPost={this.props.addNewPost}
-                        categories={this.props.categories}
-                        />
 
                         <div>
                             <Modal
@@ -249,9 +249,7 @@ class Post extends React.Component{
                             )}
                             </Modal>
                         </div> 
-                    </div>
-
-                 )}/> 
+                    
                 {/* DisplayPostWithRouter handles the post view. It receives all the info. related to the post and renders UI */}
                 <Route exact path={`/:category/:postId`} render={() => (
                     <DisplayPostWithRouter posts={this.props.posts}
@@ -267,10 +265,8 @@ class Post extends React.Component{
                     unlikeComment={this.props.unlikeComment}/>
                 )
                 }/>
-                
-                
-            </div>
-        )
+                </div>)
+            
     }
 }
 

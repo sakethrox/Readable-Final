@@ -172,7 +172,7 @@ class DisplayPost extends Component{
                                 <div className="comment-view">
                                     {comments.map((comment) => (
                                         <div key={comment['id']}>
-                                            <Input value={comment['body']} name="comment1" onChange={this.handleInputChange} info /><br/>
+                                            <Input readonly value={comment['body']} name="comment1" onChange={this.handleInputChange} info /><br/>
                                             @{comment['author']}
                                             <div style={{float: 'right'}}>
                                                 <TiThumbsUp onClick={() => this.props.likeComment(comment['id'])}/> {comment['voteScore']}&nbsp;

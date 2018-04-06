@@ -1,0 +1,85 @@
+header{
+    text-align: center;
+    padding-top: 20px;
+}
+.post-content{
+  padding-top: 50px;
+  width: 40%;
+}
+ div h3{
+  display: inline
+}
+
+div{
+  padding-bottom: 15px;
+}
+
+.button-class{
+
+  text-align: right;
+  display: inline
+}
+
+em{
+  color: rgb(214, 90, 18);
+}
+
+.add-post{
+  position: fixed;
+  float: right;
+  top: 170px;
+  right: 300px;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+fieldset{
+  padding:10px;
+}
+
+fieldset select{
+  height: 40px;
+}
+
+.post-body{
+  padding: 20px 0;
+}
+
+.title-color{
+  color: red;
+}
+
+.overall{
+  background-size: cover;
+  background-color: lightcyan;
+}
+
+
+.post-view{
+  width: 70%;
+  padding-left: 250px;
+}
+
+.comment-view{
+  padding-top:50px;
+  
+}
+
+.comment-edit{
+  width:100%;
+  border-radius: 5px;
+  color: blue;
+}
+
+hr{
+  padding: 0px;
+  
+}

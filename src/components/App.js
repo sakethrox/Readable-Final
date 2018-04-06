@@ -11,7 +11,6 @@ import { addPost, removePost, likePost, unlikePost, addComment, removeComment, l
 import * as ReadableAPI from '../utils/api'
 import { connect } from 'react-redux'
 import Post from './Post.js'
-import PostDetail from './PostDetail.js'
 import { Button, Container, Nav, Title } from 'reactbulma'
 import {withRouter, Link, Route} from 'react-router-dom'
 import '../App.css'

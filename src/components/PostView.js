@@ -23,7 +23,7 @@ class PostView extends React.Component{
                     <option value="timestamp">Created</option>
                 </select>
                 <div className='post-content'>
-                        {posts !== '' && (posts.map((post) => (
+                        {posts !== '' && (posts.filter((post) => post['deleted'] !== true).map((post) => (
                                 <div key={post['id']}>
                                     <Link to={`${post['category']}/${post['id']}`}><h3><strong>{post['title']}</strong></h3></Link> by <em>{post['author']}</em> <br/>
                                     created on: {new Date(post['timestamp']).toString()} &nbsp;

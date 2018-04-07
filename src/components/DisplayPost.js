@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {Link, Route} from 'react-router-dom';
-import {withRouter} from 'react-router-dom'
+import {Link, Route, withRouter, Redirect} from 'react-router-dom';
 import Post from './Post'
 import {Title, SubTitle, Box, Media, Button, Icon, Delete, Input, Textarea} from 'reactbulma'
 import '../App.css'
@@ -146,11 +145,15 @@ class DisplayPost extends Component{
     
     render(){
         const { postModalOpen} = this.state
-        let post = this.props.posts.filter((post) => post['id'] == this.props.match.params.postId)
+        
+        let post = this.props.posts.filter((post) => post['id'] == this.props.match.params.postId  && post['deleted'] !== true)
         let comments = this.props.comments.filter((comment) => comment['parentId'] == this.props.match.params.postId)
+        
+        
         return (
             <div>
-                {post !== '' &&  (post.map((post) => (     
+                { this.props.match.params.postId !== '' && post == '' && <div style={{textAlign: 'center'}}><b>Page not found!</b></div>}
+                {post !== '' &&   (post.map((post) => (     
                         <div className='post-view' key={post['id']}>
                             <h3><strong>{post['title']}</strong></h3> by <em>{post['author']}</em> <br/>
                             created on: {new Date(post['timestamp']).toString()} &nbsp;
@@ -241,6 +244,7 @@ class DisplayPost extends Component{
                         
                         </div>
                 )))}
+                
             </div>
         )
     }

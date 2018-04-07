@@ -12,7 +12,7 @@ import * as ReadableAPI from '../utils/api'
 import { connect } from 'react-redux'
 import Post from './Post.js'
 import { Button, Container, Nav, Title } from 'reactbulma'
-import {withRouter, Link, Route} from 'react-router-dom'
+import {withRouter, Link, Route, Redirect} from 'react-router-dom'
 import '../App.css'
 
 
@@ -64,6 +64,8 @@ class App extends Component {
   removePost = (postId) => {
     this.props.removePost(postId);
     ReadableAPI.deletePost(postId)
+    //this.props.history.push('/');
+
   }
 
   //functions related to comments
@@ -98,7 +100,7 @@ class App extends Component {
   }
 
   render() {
-    let posts = this.props.posts.filter((post) => post['deleted'] !== true);
+    let posts = this.props.posts;//filter((post) => post['deleted'] !== true);
     let comments = this.props.comments.filter((comment) => comment['deleted'] !== true);
     return (
         <Container>

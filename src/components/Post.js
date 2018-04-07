@@ -164,7 +164,7 @@ class Post extends React.Component{
                             Redux
                             </Link>
                             &nbsp;&nbsp;
-                            <Link to='/Udacity'>
+                            <Link to='/udacity'>
                             Udacity
                             </Link>
                         </Nav.Right>
@@ -188,21 +188,23 @@ class Post extends React.Component{
                         )}/>
 
                         {this.props.categories.map((category) => (
-                            <Route exact path={`/${category}`} render={() => ( 
-                                <div>
-                                    <PostView 
-                                    handleSort={this.handleSort}
-                                    openPostModal={this.openPostModal}
-                                    removePost={this.props.removePost}
-                                    likePost={this.props.likePost}
-                                    unlikePost={this.props.unlikePost}
-                                    comments={this.props.comments}
-                                    posts={this.props.posts.filter((post) => post['category'] == category)}
-                                    categories={this.props.categories}
-                                    addNewPost={this.props.addNewPost}
-                                    />
+                            <div key={category}>
+                                <Route exact path={`/${category}`} render={() => ( 
+                                    <div >
+                                        <PostView 
+                                        handleSort={this.handleSort}
+                                        openPostModal={this.openPostModal}
+                                        removePost={this.props.removePost}
+                                        likePost={this.props.likePost}
+                                        unlikePost={this.props.unlikePost}
+                                        comments={this.props.comments}
+                                        posts={this.props.posts.filter((post) => post['category'] == category)}
+                                        categories={this.props.categories}
+                                        addNewPost={this.props.addNewPost}
+                                        />
+                                    </div>
+                                    )}/>
                                 </div>
-                                )}/>
                         ))}    
 
                         
